@@ -1,11 +1,13 @@
 const express = require("express");
+const connectToMongo = require("./database/db");
+const cors = require("cors");
 const app = express();
-const connectToMongo = require("./db");
+const port = "8081";
 
 connectToMongo();
-
-const port = 3000;
+app.use(express.json());
+app.use(cors());
 
 app.listen(port, () => {
-  console.log("kudos! App is up and running at port", port);
+  console.log("Listening");
 });
