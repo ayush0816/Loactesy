@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const url="mongodb://localhost:27017/";
+const url="mongodb://localhost:27017/Locatesy";
 mongoose.connect(url,{
     useNewUrlParser : true,
     useUnifiedTopology : true
