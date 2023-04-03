@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://192.168.17.230:27017/test";
-
-const connectToMongo = () => {
-  mongoose.connect("mongodb://127.0.0.1:27017/test", () => {
-    console.log("Connected to mongo");
-  });
-};
-
-module.exports = connectToMongo;
+const url = "mongodb://127.0.0.1:27017/locatesy";
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const dbcon = mongoose.connection;
+dbcon.on("error", console.error.bind(console, "Connection Error"));
+dbcon.on("open", () => {
+  console.log("DB CONNECTED");
+});
+module.exports = dbcon;
