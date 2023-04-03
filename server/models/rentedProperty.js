@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
-
-const buyPropertySchema = new mongoose.Schema(
-  {
+const mongoose=require('mongoose');
+const rentedPropertySchema = new mongoose.Schema({
     p_id: Number, // property id
     link: String,
     name: String,
@@ -19,11 +17,9 @@ const buyPropertySchema = new mongoose.Schema(
     possession: String,
     lattitude: Number,
     longitude: Number,
-  },
-  {
+  },{
     strict: true,
-  }
-);
-
-const BuyPropertySchema = mongoose.model("Buy Property", buyPropertySchema);
-module.exports = BuyPropertySchema;
+  });
+  
+const RentedPropertyModel = mongoose.model("Rented Property", rentedPropertySchema);
+module.exports=RentedPropertyModel;
