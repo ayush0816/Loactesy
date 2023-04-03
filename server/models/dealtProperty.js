@@ -18,6 +18,9 @@ const dealtPropertySchema = new mongoose.Schema({
   possession: String,
   lattitude: Number,
   longitude: Number,
+},
+{
+  strict: true,
 });
 
 const DealtPropertySchema = mongoose.model(

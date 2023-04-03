@@ -1,11 +1,14 @@
-const mongoose=require('mongoose');
-const buySchema = new mongoose.Schema({
-    p_id: Number,
+const mongoose = require("mongoose");
+const buySchema = new mongoose.Schema(
+  {
+   
     userId: String,
     category: String,
-  },{
-    strict : true,
-  });
-  
+  },
+  {
+    strict: true,
+  }
+);
+
 const BuyModel = mongoose.model("Buy", buySchema);
-module.exports=BuyModel;
+module.exports = BuyModel;

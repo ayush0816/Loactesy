@@ -1,9 +1,10 @@
 const express=require('express');
 const db=require("./database/db");
 const cors=require("cors");
-import passport from "passport";
-import session from 'express-session';
-import privateRouteConfig from './config/routeConfig';
+const auth= require("./routes/auth");
+const passport=require("passport");
+const session=require("express-session");
+const privateRouteConfig=require("./config/passportConfig");
 
 privateRouteConfig(passport);
 
@@ -28,6 +29,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
+
+app.use("/auth",auth);
 
 app.listen(port, () => {
   console.log("Listening");

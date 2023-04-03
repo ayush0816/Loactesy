@@ -18,6 +18,9 @@ const rentPropertySchema = new mongoose.Schema({
   possession: String,
   lattitude: Number,
   longitude: Number,
+},
+{
+  strict: true,
 });
 
 const RentPropertySchema = mongoose.model("Rent Property", rentPropertySchema);

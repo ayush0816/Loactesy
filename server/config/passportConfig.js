@@ -1,9 +1,6 @@
-import e from "cors";
-import passport from "passport";
-import JwtPassport from "passport-jwt";
-
+const JwtPassport=require("passport-jwt");
 // Model
-import { UserModel } from "../models/user";
+const UserModel=require('../models/user');
 
 const JWTStrategy = JwtPassport.Strategy;
 const ExtractJwt = JwtPassport.ExtractJwt;
@@ -13,7 +10,7 @@ const options = {
     secretOrKey: "Locatesy"
 }
 
-export default (passport) => {
+module.exports= (passport) => {
     passport.use(
         new JWTStrategy(options, async(jwt__payload, done) => {
             try {

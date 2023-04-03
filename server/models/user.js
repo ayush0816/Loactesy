@@ -1,6 +1,7 @@
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+const jwt=require('jsonwebtoken');
+const mongoose=require('mongoose');
+const bcrypt=require('bcryptjs');
+
 const userSchema = new mongoose.Schema({
   name: String,
   username: { type: String, unique: true},
@@ -12,7 +13,7 @@ userSchema.methods.generateJwtToken = function() {
 }
 
 userSchema.statics.findByUserNameAndPassword = async({ username, password }) => {
-  const user = await UserModel.findOne({ userName });
+  const user = await UserModel.findOne({ username });
   if (!user)
       throw new Error("User does not exists");
 
@@ -26,7 +27,7 @@ userSchema.statics.findByUserNameAndPassword = async({ username, password }) => 
 
 userSchema.statics.findByUserName = async({ userName }) => {
   
-  const checkUserByUserName = await UserModel.findOne({ userName });
+  const checkUserByUserName = await UserModel.findOne({ username });
   if (checkUserByUserName)
       throw new Error("User with this username already exists");
   return false;
@@ -55,6 +56,6 @@ userSchema.pre("save", function(next) {
   })
 });
 
-const UserSchema = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("User", userSchema);
 
-module.exports = UserSchema;
+module.exports = UserModel;
