@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const rentedPropertySchema = new mongoose.Schema({
-    p_id: Number, // property id
+    
     link: String,
     name: String,
     location: String,
