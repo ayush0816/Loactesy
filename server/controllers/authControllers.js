@@ -12,8 +12,7 @@ const signup = async (req, res) => {
 
     return res.status(200).json({ token: token, status: "success" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error });
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 
@@ -24,7 +23,7 @@ const login = async (req, res) => {
     token = user.generateJwtToken();
     return res.status(200).json({ token: token, status: "success" });
   } catch (error) {
-    console.log(error);
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 

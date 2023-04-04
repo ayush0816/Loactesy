@@ -10,8 +10,8 @@ const getAvailableProperties = async (req, res) => {
   try {
     const Property = await RentPropertyModel.find(obj);
     return res.status(200).json({ property: Property, success: "success" });
-  } catch (err) {
-    return res.status(500).json({ error: err });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 
@@ -27,8 +27,8 @@ const rentProperty = async (req, res) => {
     arr.push(req.body.id);
     await UserModel.updateMany({ _id: req.user }, { rentproperty: arr });
     res.status(200).json({ status: "Property Renting Success" });
-  } catch (err) {
-    return res.status(500).json({ error: err });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 

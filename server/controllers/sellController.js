@@ -19,8 +19,8 @@ const addBuyProperty = async (req, res) => {
     arr.push(p._id);
     await UserModel.updateMany({ _id: req.user }, { buyproperty: arr });
     return res.status(200).json({ status: "success" });
-  } catch (err) {
-    return res.status(500).json({ error: err });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 
