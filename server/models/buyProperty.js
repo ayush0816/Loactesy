@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const buyPropertySchema = new mongoose.Schema({
   link: String,
-  name: String,
-  location: String,
+  name: { type: String, require: true },
+  location: { type: String, require: true },
   address: { type: String, require: true },
-  rooms: Number,
-  price: Number,
+  rooms: { type: Number, require: true },
+  price: { type: Number, require: true },
   owner: {
     type: mongoose.Types.ObjectId,
     ref: "User",
