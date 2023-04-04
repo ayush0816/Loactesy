@@ -13,6 +13,7 @@ const signup = async (req, res) => {
     return res.status(200).json({ token: token, status: "success" });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ error: error });
   }
 };
 
