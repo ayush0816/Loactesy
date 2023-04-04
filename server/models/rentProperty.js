@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-
-const buyPropertySchema = new mongoose.Schema(
+const rentPropertySchema = new mongoose.Schema(
   {
     link: String,
     name: String,
@@ -16,5 +15,5 @@ const buyPropertySchema = new mongoose.Schema(
   }
 );
 
-const BuyPropertySchema = mongoose.model("Buy Property", buyPropertySchema);
-module.exports = BuyPropertySchema;
+const RentPropertyModel = mongoose.model("Rent Property", rentPropertySchema);
+module.exports = RentPropertyModel;
