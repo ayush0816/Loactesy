@@ -3,13 +3,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
+  phone: { type: Number, required: true },
+  address: { type: String, required: true },
   username: { type: String, unique: true },
+  buyproperty: [{ type: mongoose.Types.ObjectId, ref: "Buy Property" }],
+  rentproperty: [{ type: mongoose.Types.ObjectId, ref: "Rent Property" }],
   password: String,
 });
 
 userSchema.methods.generateJwtToken = function () {
-  return jwt.sign({ user: this._id.toString() }, "InstagramApp");
+  return jwt.sign({ user: this._id.toString() }, "Locatesy");
 };
 
 userSchema.statics.findByUserNameAndPassword = async ({

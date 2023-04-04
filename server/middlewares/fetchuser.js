@@ -1,13 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 const fetchUser = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) {
-    return res.status(401).send("please enter valid token");
-  }
-  const data = jwt.verify(token, "ayushsingh");
-  req.id = data.user;
-  next();
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  jwt.verify(token, "Locatesy", (err, user) => {
+    delete user["iat"];
+    if (err) return res.Status(403).json({ error: err });
+    req.user = user.user;
+    next();
+  });
 };
 
 module.exports = fetchUser;

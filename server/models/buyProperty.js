@@ -1,20 +1,19 @@
 const mongoose = require("mongoose");
 
-const buyPropertySchema = new mongoose.Schema(
-  {
-    link: String,
-    name: String,
-    location: String,
-    rooms: String,
-    price: String,
-    owner: String,
-    description: String,
-    status: String,
+const buyPropertySchema = new mongoose.Schema({
+  link: String,
+  name: String,
+  location: String,
+  address: { type: String, require: true },
+  rooms: Number,
+  price: Number,
+  owner: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
   },
-  {
-    strict: true,
-  }
-);
+  description: String,
+  status: Boolean,
+});
 
 const BuyPropertyModel = mongoose.model("Buy Property", buyPropertySchema);
 module.exports = BuyPropertyModel;

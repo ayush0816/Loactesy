@@ -5,7 +5,14 @@ const rentPropertySchema = new mongoose.Schema({
   location: String,
   rooms: Number,
   price: Number,
-  owner: String,
+  owner: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
+  renter: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
   description: String,
   status: String,
 });
