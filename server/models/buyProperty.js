@@ -6,7 +6,7 @@ const buyPropertySchema = new mongoose.Schema(
     name: String,
     location: String,
     rooms: String,
-    priceRange: String,
+    price: String,
     owner: String,
     description: String,
     status: String,
@@ -16,5 +16,5 @@ const buyPropertySchema = new mongoose.Schema(
   }
 );
 
-const BuyPropertySchema = mongoose.model("Buy Property", buyPropertySchema);
-module.exports = BuyPropertySchema;
+const BuyPropertyModel = mongoose.model("Buy Property", buyPropertySchema);
+module.exports = BuyPropertyModel;
