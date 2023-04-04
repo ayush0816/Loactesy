@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateJwtToken = function() {
-  return jwt.sign({ user: this._id.toString() }, "InstagramApp")
+  return jwt.sign({ user: this._id.toString() },"Locatesy")
 }
 
 userSchema.statics.findByUserNameAndPassword = async({ username, password }) => {
@@ -25,7 +25,7 @@ userSchema.statics.findByUserNameAndPassword = async({ username, password }) => 
   return user;
 }
 
-userSchema.statics.findByUserName = async({ userName }) => {
+userSchema.statics.findByUserName = async({ username }) => {
   
   const checkUserByUserName = await UserModel.findOne({ username });
   if (checkUserByUserName)
