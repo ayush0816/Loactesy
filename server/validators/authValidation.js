@@ -2,7 +2,7 @@ const joi = require("joi");
 const ValidateSignup = (userData) => {
   const Schema = joi.object({
     name: joi.string().min(3).max(20),
-    username: joi.string().email(),
+    username: joi.string().email().required(),
     password: joi.string().required().min(5),
   });
 
@@ -11,7 +11,7 @@ const ValidateSignup = (userData) => {
 
 const ValidateSignin = (userData) => {
   const Schema = joi.object({
-    username: joi.string().email(),
+    username: joi.string().email().required(),
     password: joi.string().required().min(5),
   });
 
