@@ -7,7 +7,7 @@ const privateRouteConfig = require("./config/passportConfig");
 
 const auth = require("./routes/auth");
 const buyAndSell = require("./routes/buyAndSell");
-// const rentAndLet=require("./routes/rentAndLet");
+const rentAndLet=require("./routes/rentAndLet");
 
 const port = "8081";
 const app = express();
@@ -36,7 +36,7 @@ passport.deserializeUser(function (user, done) {
 
 app.use("/auth", auth);
 app.use("/purchaseproperty", buyAndSell);
-// app.use("/rentproperty",rentAndLet);
+app.use("/rentproperty",rentAndLet);
 
 app.listen(port, () => {
   console.log("Listening");

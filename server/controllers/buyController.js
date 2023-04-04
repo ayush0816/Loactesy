@@ -19,25 +19,17 @@ const getAvailableProperties = async (req, res) => {
 const buyProperty = async (req, res) => {
   try {
     let property = await BuyPropertyModel.findById(req.body.id);
-    if (!property) return res.status(400).send("Property not found");
-    let prop = { ...property };
-    const currentOwner = prop.owner;
-    prop.owner = req.user;
-    prop.status = false;
-    property = await BuyPropertyModel.findByIdAndUpdate(
-      req.body.id,
-      {
-        $set: prop,
-      },
-      {
-        new: true,
-      }
-    );
+    const currentOwner = property.owner;
+    console.log(currentOwner);
+    await BuyPropertyModel.updateMany({_id:req.body.id},{owner:req.user,status:false});
     let user = await UserModel.findById(currentOwner);
+    console.log(user);
     let arr = user.buyProperty;
+    console.log(arr);
     let idx = arr.indexOf(req.body.id);
     arr.splice(idx, 1);
     user.buyProperty = arr;
+    console.log(arr);
     await UserModel.updateMany({ _id: currentOwner }, { buyProperty: arr });
     user = await UserModel.findById(req.user);
     arr = user.buyProperty;
