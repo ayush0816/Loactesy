@@ -15,6 +15,7 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    
     await ValidateSignin(req.body);
     const user = await UserSchema.findByUserNameAndPassword(req.body);
     token = user.generateJwtToken();
