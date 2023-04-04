@@ -4,12 +4,16 @@ const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
 const privateRouteConfig = require("./config/passportConfig");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./config/config.env" });
 
 const auth = require("./routes/auth");
 const buyAndSell = require("./routes/buyAndSell");
-const rentAndLet=require("./routes/rentAndLet");
+const rentAndLet = require("./routes/rentAndLet");
+const view = require("./routes/view");
 
-const port = "8081";
+const port = process.env.PORT;
 const app = express();
 
 privateRouteConfig(passport);
@@ -20,7 +24,7 @@ app.use(
   session({
     resave: false,
     saveUninitialized: true,
-    secret: "InstaApp",
+    secret: process.env.SECRET,
   })
 );
 app.use(passport.initialize());
@@ -35,8 +39,9 @@ passport.deserializeUser(function (user, done) {
 
 app.use("/auth", auth);
 app.use("/purchaseproperty", buyAndSell);
-app.use("/rentproperty",rentAndLet);
+app.use("/rentproperty", rentAndLet);
+app.use("/viewproperty", view);
 
 app.listen(port, () => {
-  console.log("Listening");
+  console.log("kudos! App is up and running at port", port);
 });

@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const rentPropertySchema = new mongoose.Schema({
   link: String,
-  name: String,
-  location: String,
-  rooms: Number,
-  price: Number,
+  name: { type: String, require: true },
+  location: { type: String, require: true },
+  address: { type: String, require: true },
+  rooms: { type: Number, require: true },
+  price: { type: Number, require: true },
   owner: {
     type: mongoose.Types.ObjectId,
     ref: "User",
