@@ -8,25 +8,28 @@ const getAvailableProperties = async (req, res) => {
   if (req.query.rooms) obj.rooms = req.query.rooms;
   obj.status = true;
   try {
-    const Property = await rentPropertyModel.find(obj);
+    const Property = await RentPropertyModel.find(obj);
     return res.status(200).json({ property: Property, success: "success" });
-  } catch (err) {
-    return res.status(500).json({ error: err });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
 };
 
 const rentProperty = async (req, res) => {
   try {
-        await RentPropertyModel.updateMany({_id:req.body.id},{renter : req.user});
-        let arr=UserModel.findById(req.user).rentProperty;
-        arr.push(req.body.id);
-        await UserModel.updateMany({_id:req.user},{rentProperty:arr});
-    res.status(200).json({ status: "Property Purchase Success" });
-  } 
-  catch (err) {
-    return res.status(500).json({ error: err });
+    await RentPropertyModel.updateMany(
+      { _id: req.body.id },
+      { renter: req.user ,status: false}
+    );
+    let user = await UserModel.findById(req.user);
+    let arr = user.rentproperty;
+    //console.log(arr);
+    arr.push(req.body.id);
+    await UserModel.updateMany({ _id: req.user }, { rentproperty: arr });
+    res.status(200).json({ status: "Property Renting Success" });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
- 
 };
 
 module.exports = { getAvailableProperties, rentProperty };

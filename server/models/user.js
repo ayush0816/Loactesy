@@ -1,20 +1,23 @@
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./config/config.env" });
 
 const userSchema = new mongoose.Schema({
-  name: {type : String, required : true},
-  phone: {type : Number, required : true},
-  address: {type: String, required : true},
-  username: { type: String, unique: true},
-  buyproperty:[{ type : mongoose.Types.ObjectId, ref: 'Buy Property'}],
-  rentproperty:[{type : mongoose.Types.ObjectId, ref: 'Rent Property'}],
-  password: String
+  name: { type: String, required: true },
+  phone: { type: Number, required: true },
+  address: { type: String, required: true },
+  username: { type: String, unique: true },
+  buyproperty: [{ type: mongoose.Types.ObjectId, ref: "Buy Property" }],
+  rentproperty: [{ type: mongoose.Types.ObjectId, ref: "Rent Property" }],
+  password: String,
 });
 
-userSchema.methods.generateJwtToken = function() {
-  return jwt.sign({ user: this._id.toString() },"Locatesy")
-}
+userSchema.methods.generateJwtToken = function () {
+  return jwt.sign({ user: this._id.toString() }, process.env.SECRET);
+};
 
 userSchema.statics.findByUserNameAndPassword = async ({
   username,
@@ -28,10 +31,9 @@ userSchema.statics.findByUserNameAndPassword = async ({
   if (!doesPasswordMatch) throw new Error("Invalid Password !!!");
 
   return user;
-}
+};
 
-userSchema.statics.findByUserName = async({ username }) => {
-  
+userSchema.statics.findByUserName = async ({ username }) => {
   const checkUserByUserName = await UserModel.findOne({ username });
   if (checkUserByUserName)
     throw new Error("User with this username already exists");

@@ -1,14 +1,15 @@
-const joi=require('joi');
+const Joi = require("joi");
 
 const ValidateProperty = (userData) => {
-    const Scheme = joi.object({
-        name: joi.string().min(3).max(30),
-        username: joi.string().email(),
-        password: joi.string().required().min(5)
-       
-    })
+  const Schema = Joi.object({
+    name: Joi.string().min(3).max(40).required(),
+    location: Joi.string().min(3).max(40).required(),
+    address: Joi.string().min(3).max(40).required(),
+    rooms: Joi.number().integer().min(1).max(1000).required(),
+    price: Joi.number().integer(),
+  });
 
-    return Scheme.validateAsync(userData);
-}
+  return Schema.validateAsync(userData);
+};
 
-module.exports={ValidateProperty};
+module.exports = { ValidateProperty };

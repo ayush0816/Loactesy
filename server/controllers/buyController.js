@@ -10,36 +10,37 @@ const getAvailableProperties = async (req, res) => {
   try {
     const Property = await BuyPropertyModel.find(obj);
     return res.status(200).json({ property: Property, success: "success" });
-  } catch (err) {
-    return res.status(500).json({ error: err });
+  } catch (error) {
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
-  
 };
 
-const buyProperty = async (req, res) => {
+const buyNewProperty = async (req, res) => {
   try {
     let property = await BuyPropertyModel.findById(req.body.id);
-    const currentOwner = property.owner;
-    console.log(currentOwner);
-    await BuyPropertyModel.updateMany({_id:req.body.id},{owner:req.user,status:false});
+    if (!property) return res.status(400).send("Property not found");
+
+    const currentOwner = property.owner.toString();
+
+    await BuyPropertyModel.updateMany(
+      { _id: req.body.id },
+      { owner: req.user, status: false }
+    );
     let user = await UserModel.findById(currentOwner);
-    console.log(user);
-    let arr = user.buyProperty;
+
+    let arr = user.buyproperty;
     console.log(arr);
     let idx = arr.indexOf(req.body.id);
     arr.splice(idx, 1);
-    user.buyProperty = arr;
-    console.log(arr);
-    await UserModel.updateMany({ _id: currentOwner }, { buyProperty: arr });
+    await UserModel.updateMany({ _id: currentOwner }, { buyproperty: arr });
     user = await UserModel.findById(req.user);
-    arr = user.buyProperty;
+    arr = user.buyproperty;
     arr.push(req.body.id);
-    await UserModel.updateMany({ _id: req.user }, { buyProperty: arr });
+    await UserModel.updateMany({ _id: req.user }, { buyproperty: arr });
     res.status(200).json({ status: "Property Purchase Success" });
   } catch (err) {
-    return res.status(500).json({ error: err });
+    return res.status(400).json({ error: error.message, status: "failed" });
   }
- 
 };
 
-module.exports = { getAvailableProperties, buyProperty };
+module.exports = { getAvailableProperties, buyNewProperty };
