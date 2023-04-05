@@ -3,6 +3,7 @@ const rentPropertySchema = new mongoose.Schema(
   {
     link: String,
     name: String,
+    address:String,
     location: String,
     rooms: Number,
     price: Number,
