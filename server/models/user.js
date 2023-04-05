@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./config/config.env" });
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -13,7 +16,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateJwtToken = function () {
-  return jwt.sign({ user: this._id.toString() }, "Locatesy");
+  return jwt.sign({ user: this._id.toString() }, process.env.SECRET);
 };
 
 userSchema.statics.findByUserNameAndPassword = async ({

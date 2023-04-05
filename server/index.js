@@ -43,5 +43,5 @@ app.use("/rentproperty", rentAndLet);
 app.use("/viewproperty", view);
 
 app.listen(port, () => {
-  console.log("kudos! App is up and running at port", port);
+  console.log(`kudos! App is up and running at port : ${port}`);
 });

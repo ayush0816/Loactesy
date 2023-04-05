@@ -19,11 +19,11 @@ const rentProperty = async (req, res) => {
   try {
     await RentPropertyModel.updateMany(
       { _id: req.body.id },
-      { renter: req.user }
+      { renter: req.user ,status: false}
     );
     let user = await UserModel.findById(req.user);
     let arr = user.rentproperty;
-    console.log(arr);
+    //console.log(arr);
     arr.push(req.body.id);
     await UserModel.updateMany({ _id: req.user }, { rentproperty: arr });
     res.status(200).json({ status: "Property Renting Success" });
