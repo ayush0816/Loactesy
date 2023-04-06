@@ -109,7 +109,7 @@ function MyAppBar({ isBg }) {
       style={{ height: isBg ? "50vw" : "0", marginBottom: "200" }}
     >
       <AppBar
-        position="sticky"
+        position="absolute"
         style={{
           boxShadow: "none",
           color: "black",
