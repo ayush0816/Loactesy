@@ -19,7 +19,7 @@ import Icon from "../images/Icon.png";
 
 import { Link } from "react-router-dom";
 
-const pages = ["Buy", "Rent", "Sell"];
+const pages = ["buy", "rent", "sell"];
 const actions = ["signup", "login"];
 
 // const useStyles = makeStyles((theme) => ({
@@ -91,12 +91,14 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 6, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={`/${page}`} style={{ textDecoration: "none" }}>
+                <Button
+                  key={page}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: -4, display: { xs: "none", md: "flex" } }}>
