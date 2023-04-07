@@ -37,7 +37,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Login = () => {
+const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,7 +53,7 @@ const Login = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 12,
+            marginTop: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -63,7 +63,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            SignUp
           </Typography>
           <Box
             component="form"
@@ -132,7 +132,7 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              SignUp
             </Button>
             <Grid container>
               <Grid item xs>
@@ -152,4 +152,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

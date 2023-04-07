@@ -5,238 +5,140 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-
+import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import Icon from "../images/Icon.png";
-// import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+import AdbIcon from "@mui/icons-material/Adb";
 import { makeStyles } from "@material-ui/core/styles";
+
 // import bImg from "../images/navpic8.jpg";
+import Icon from "../images/Icon.png";
 
-const pages = ["Buy", "Sell", "Rent"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Buy", "Rent", "Sell"];
+const actions = ["Signup", "Login"];
 
-const useStyles = makeStyles((theme) => ({
-  header: {
-    // backgroundImage: `url(${bImg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
-    width: "100%",
-    height: "auto",
-    filter: "brightness(0.9)",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   header: {
+//     backgroundImage: `url(${bImg})`,
+//     backgroundRepeat: "no-repeat",
+//     backgroundSize: "contain",
+//     width: "100%",
+//     height: "auto",
+//     filter: "brightness(0.9)",
+//   },
+// }));
 
-const styles = {
-  customizeToolbar: {
-    minHeight: 72,
-  },
-};
-
-function MyAppBar({ isBg }) {
-  //   const navigate = useNavigate();
-
-  const classes1 = useStyles();
-  //   useEffect(async () => {
-  //     // const token = localStorage.getItem("accessToken");
-  //     // try {
-  //     //   if (token === "null") throw "null";
-  //     //   const resp = await axios.get("/property", {
-  //     //     headers: {
-  //     //       Authorization: "Bearer " + token,
-  //     //     },
-  //     //   });
-  //     // } catch (err) {
-  //     //   console.log("in error");
-  //     //   localStorage.setItem("accessToken", null);
-  //     //   requestAccessToken().then((msg) => {
-  //     //     console.log("req access token resp", msg);
-  //     //     if (!msg) navigate("/login");
-  //     //   });
-  //     // }
-  //   });
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = (e) => {
-    console.log(e.target.value);
-    setAnchorElNav(null);
-    // navigate("/")
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const logoutUser = () => {
-    localStorage.setItem("accessToken", null);
-    localStorage.setItem("refreshToken", null);
-    localStorage.setItem("userName", null);
-  };
-
-  const showProfile = () => {
-    console.log("yes");
-    // navigate("/profile");
-  };
-
-  function handleMenuClickEvent(menuChoice) {
-    if (menuChoice == "Logout") {
-      logoutUser();
-      alert("User Logged Out.");
-    } else if (menuChoice === "Profile") showProfile();
-  }
-  // const token = localStorage.getItem("accessToken");
-  // if(token === null) {
-  //   navigate("/login")
-  // }
+function Navbar() {
+  // const classes1 = useStyles();
+  // const [anchorElNav, setAnchorElNav] =
+  //   (React.useState < null) | (HTMLElement > null);
+  // const [anchorElUser, setAnchorElUser] =
+  //   (React.useState < null) | (HTMLElement > null);
 
   return (
-    <div
-      className={isBg ? classes1.header : ""}
-      style={{ height: isBg ? "50vw" : "0", marginBottom: "200" }}
-    >
-      <AppBar
-        position="absolute"
-        style={{
-          boxShadow: "none",
-          color: "black",
-          backgroundColor: "black",
-          opacity: "70%",
-        }}
-      >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Box
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-              style={{ alignSelf: "start", color: "white" }}
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ flexGrow: 9, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
             >
-              <IconButton
-                size="large"
-                aria-label="suraj"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <img
-              src={""}
-              alt="logo"
-              //   onClick={() => {
-              //     navigate("/");
-              //   }}
-              style={{
-                cursor: "pointer",
-                width: "120px",
-                marginRight: "8rem",
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              // anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
               }}
-            />
-
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              // open={Boolean(anchorElNav)}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  // onChange={(e) => handleCloseNavMenu(e.target.value)}
-                  //   onClick={() => {
-                  //     navigate(
-                  //       "/" +
-                  //         (page.toLowerCase() === "buy" ? "" : page.toLowerCase())
-                  //     );
-                  //   }}
-                  // onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                    fontWeight: "medium",
-                    fontSize: "18px",
-                    marginRight: "10px",
-                  }}
-                >
-                  {page}
-                </Button>
+                <MenuItem key={page}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
               ))}
-            </Box>
+            </Menu>
+          </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Suraj" src="" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+          <img
+            src={Icon}
+            alt="logo"
+            style={{
+              cursor: "pointer",
+              width: "120px",
+              marginRight: "4rem",
+            }}
+          />
+
+          <Box sx={{ flexGrow: 6, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                    <Typography
-                      value={setting}
-                      onClick={() => handleMenuClickEvent(setting)}
-                      textAlign="center"
-                    >
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </div>
+                {page}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: -4, display: { xs: "none", md: "flex" } }}>
+            {actions.map((page) => (
+              <Button
+                key={page}
+                sx={{ mx: 1, my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            {/* <Tooltip title="Open settings">
+              <IconButton sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip> */}
+            {/* <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu> */}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
-
-export default MyAppBar;
+export default Navbar;
