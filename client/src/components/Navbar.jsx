@@ -17,8 +17,10 @@ import { makeStyles } from "@material-ui/core/styles";
 // import bImg from "../images/navpic8.jpg";
 import Icon from "../images/Icon.png";
 
+import { Link } from "react-router-dom";
+
 const pages = ["Buy", "Rent", "Sell"];
-const actions = ["Signup", "Login"];
+const actions = ["signup", "login"];
 
 // const useStyles = makeStyles((theme) => ({
 //   header: {
@@ -99,12 +101,14 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: -4, display: { xs: "none", md: "flex" } }}>
             {actions.map((page) => (
-              <Button
-                key={page}
-                sx={{ mx: 1, my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={`/${page}`} style={{ textDecoration: "none" }}>
+                <Button
+                  key={page}
+                  sx={{ mx: 1, my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
