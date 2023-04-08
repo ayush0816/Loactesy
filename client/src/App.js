@@ -7,6 +7,7 @@ import Rent from "./components/Rent";
 import Sell from "./components/Sell";
 import Buy from "./components/Buy";
 import Home from "./components/Home";
+import About from "./components/About";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/about" element={<About />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/rent" element={<Rent />} />
