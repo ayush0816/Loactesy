@@ -41,7 +41,7 @@ function Navbar() {
   //   (React.useState < null) | (HTMLElement > null);
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 9, display: { xs: "flex", md: "none" } }}>

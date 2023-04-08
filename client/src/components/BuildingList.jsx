@@ -4,7 +4,7 @@ const BuildingList = () => {
     // list=[];
   return (
     <>
-        <div className="container justify-content-around">
+        <div className="container ">
             <div className="row p-2">
                 <BuildingCard />
                 <BuildingCard />
@@ -12,6 +12,11 @@ const BuildingList = () => {
                 <BuildingCard />
                 <BuildingCard />
                 <BuildingCard />
+                <BuildingCard />
+                <BuildingCard />
+                <BuildingCard />
+                <BuildingCard />
+                
 
             </div>
         </div>
