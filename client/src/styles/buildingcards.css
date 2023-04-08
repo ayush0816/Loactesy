@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .buildingcard{
+        width : 100% !important;
+    }
+}
+@media(min-width :769px){
+    .buildingcard{
+        width : 21rem;
+        margin-right : 1rem!important;
+    }
+}
+
