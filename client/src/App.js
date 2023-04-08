@@ -8,17 +8,17 @@ import Sell from "./components/Sell";
 import Buy from "./components/Buy";
 import Home from "./components/Home";
 import About from "./components/About";
+import Aboutus from "./components/Aboutus";
 
 function App() {
   return (
     <div className="App">
-      
-      
-      <Router> 
-      <Navbar /> 
+      <Router>
+        <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
+          <Route exact path="/mme" element={<About />} />
+          <Route exact path="/about" element={<Aboutus />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/rent" element={<Rent />} />
