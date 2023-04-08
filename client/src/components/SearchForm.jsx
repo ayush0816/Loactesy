@@ -27,15 +27,16 @@ const SearchForm = () => {
                 className=" form-control border border-info"
               />
             </div>
+            <div className="col-12 py-2 col-md-4 col-lg-2 px-md-0 mx-0">
+              <input
+                type="text"
+                name="location"
+                placeholder="Search by Property Name"
+                className=" form-control border border-info"
+              />
+            </div>
             <div className="col-12 col-md-4 col-lg-3 py-2 px-md-0 mr-auto">
               <div className="input-group">
-                <input
-                  type="text"
-                  placeholder="Search by Property Name"
-                  name="name"
-                  className="form-control border border-info"
-                />
-
                 <div className="input-group-append">
                   <input
                     type="submit"
