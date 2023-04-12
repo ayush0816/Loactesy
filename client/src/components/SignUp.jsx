@@ -14,8 +14,9 @@ import {
 } from "@mui/material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -38,15 +39,42 @@ function Copyright(props) {
 const theme = createTheme();
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
+  const port = "http://localhost:8081";
+  let navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    const response = await fetch(`${port}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.get("email"),
+        password: data.get("password"),
+        address: data.get("address"),
+        name: data.get("name"),
+        phone: data.get("phone"),
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.status === "success") {
+      localStorage.setItem("token", json.token);
+      navigate("/mme");
+    }
+    console.log(json);
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

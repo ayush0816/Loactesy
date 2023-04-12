@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -38,13 +40,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const port = "http://localhost:8081";
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    const response = await fetch(`${port}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.get("email"),
+        password: data.get("password"),
+      }),
     });
+    const json = await response.json();
+    console.log(json);
+    if (json.status === "success") {
+      localStorage.setItem("token", json.token);
+      navigate("/mme");
+    }
+    console.log(json);
   };
 
   return (
