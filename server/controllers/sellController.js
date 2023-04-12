@@ -2,13 +2,13 @@ const BuyPropertyModel = require("../models/buyProperty");
 const UserModel = require("../models/user");
 const { ValidateProperty } = require("../validators/buyAndSellValidation");
 const addBuyProperty = async (req, res) => {
-  try {
-    const validate = await ValidateProperty(req.body.property);
-  } catch (error) {
-    return res.status(500).send("Enter Valid Credentials");
-  }
+  // try {
+  //   const validate = await ValidateProperty(req.body);
+  // } catch (error) {
+  //   return res.status(500).json("Enter Valid Credentials");
+  // }
 
-  let newProperty = { ...req.body.property };
+  let newProperty = { ...req.body };
   newProperty.owner = req.user;
   newProperty.status = true;
 
